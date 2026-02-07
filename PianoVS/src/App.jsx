@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import Horse from "./Horse.jsx";
 export default function App() {
   const [gameMode, setGameMode] = useState("menu");
   switch (gameMode) {
