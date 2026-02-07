@@ -1,5 +1,15 @@
 {
-  "dependencies": {
-    "prettier": "^3.8.1"
+  "name": "piano-mage-duel",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "node server/index.js",
+    "dev:client": "cd client && npm run dev",
+    "build": "cd client && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }
+

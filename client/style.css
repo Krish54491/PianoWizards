@@ -1,0 +1,150 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background: #1a1a2e;
+  color: #eee;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  margin: 0;
+}
+
+#app {
+  text-align: center;
+  max-width: 800px;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+button {
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+}
+
+#lobby button, #controls button, #game-over button {
+  background: #4a69bd;
+  color: white;
+  margin: 5px;
+}
+
+#lobby button:hover, #controls button:hover, #game-over button:hover {
+  background: #6a89cc;
+}
+
+#room-link {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+#status {
+  margin-bottom: 20px;
+}
+
+#letters {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  font-size: 20px;
+  font-family: monospace;
+  margin-bottom: 10px;
+}
+
+#turn-info {
+  font-size: 18px;
+  color: #f9ca24;
+}
+
+#timer {
+  font-size: 24px;
+  color: #eb4d4b;
+  margin-top: 10px;
+}
+
+#piano {
+  display: inline-block;
+  position: relative;
+  margin: 20px 0;
+}
+
+#white-keys {
+  display: flex;
+}
+
+#white-keys button {
+  width: 50px;
+  height: 150px;
+  background: white;
+  color: #333;
+  border: 1px solid #333;
+  margin: 0 1px;
+  font-weight: bold;
+}
+
+#white-keys button:hover {
+  background: #ddd;
+}
+
+#white-keys button.active {
+  background: #f9ca24;
+}
+
+#black-keys {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 25px;
+  z-index: 1;
+}
+
+#black-keys button {
+  width: 35px;
+  height: 90px;
+  background: #222;
+  color: #fff;
+  border: 1px solid #000;
+  margin: 0 5px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+#black-keys button:hover {
+  background: #444;
+}
+
+#black-keys button.active {
+  background: #f39c12;
+}
+
+#black-keys .spacer {
+  width: 45px;
+}
+
+#controls {
+  margin: 20px 0;
+}
+
+#message {
+  font-size: 16px;
+  min-height: 24px;
+  color: #7bed9f;
+}
+
+#game-over {
+  margin-top: 30px;
+}
+
+#game-over h2 {
+  font-size: 28px;
+}
+

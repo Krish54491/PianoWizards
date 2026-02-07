@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Piano MAGE Duel</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="app">
+    <h1>Piano MAGE Duel</h1>
+
+    <div id="lobby">
+      <button id="create-btn">Create Game</button>
+      <div id="share-link" style="display:none;">
+        <p>Share this link with your friend:</p>
+        <input type="text" id="room-link" readonly>
+        <p>Waiting for opponent...</p>
+      </div>
+    </div>
+
+    <div id="game" style="display:none;">
+      <div id="status">
+        <div id="letters">
+          <span>You: <span id="my-letters">____</span></span>
+          <span>Opponent: <span id="opp-letters">____</span></span>
+        </div>
+        <div id="turn-info"></div>
+        <div id="timer" style="display:none;">Time: <span id="time-left">50</span>s</div>
+      </div>
+
+      <div id="piano">
+        <div id="black-keys">
+          <button data-note="C#4" data-key="W">W</button>
+          <button data-note="D#4" data-key="E">E</button>
+          <span class="spacer"></span>
+          <button data-note="F#4" data-key="T">T</button>
+          <button data-note="G#4" data-key="Y">Y</button>
+          <button data-note="A#4" data-key="U">U</button>
+          <span class="spacer"></span>
+          <button data-note="C#5" data-key="O">O</button>
+          <button data-note="D#5" data-key="P">P</button>
+        </div>
+        <div id="white-keys">
+          <button data-note="C4" data-key="A">A</button>
+          <button data-note="D4" data-key="S">S</button>
+          <button data-note="E4" data-key="D">D</button>
+          <button data-note="F4" data-key="F">F</button>
+          <button data-note="G4" data-key="G">G</button>
+          <button data-note="A4" data-key="H">H</button>
+          <button data-note="B4" data-key="J">J</button>
+          <button data-note="C5" data-key="K">K</button>
+          <button data-note="D5" data-key="L">L</button>
+        </div>
+      </div>
+
+      <div id="controls">
+        <button id="record-btn" style="display:none;">Start Recording</button>
+        <button id="done-btn" style="display:none;">Done</button>
+        <button id="listen-btn" style="display:none;">Listen to Melody</button>
+        <button id="submit-btn" style="display:none;">Submit Attempt</button>
+      </div>
+
+      <div id="message"></div>
+    </div>
+
+    <div id="game-over" style="display:none;">
+      <h2 id="result-text"></h2>
+      <button id="new-game-btn">New Game</button>
+    </div>
+  </div>
+
+  <script type="module" src="/main.js"></script>
+</body>
+</html>
+
