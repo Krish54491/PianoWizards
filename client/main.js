@@ -543,6 +543,7 @@ function handleMessage(msg) {
       } else {
         turnInfo.textContent = "Opponent is recording a melody...";
         hideAllControls();
+        showHands();
       }
       showMessage("");
       break;
@@ -568,6 +569,7 @@ function handleMessage(msg) {
         );
         turnInfo.textContent = "Your turn to record a melody!";
         hideAllControls();
+        hideHands();
         setupRecordingMode();
       } else {
         // Opponent just attempted, now they record
@@ -578,6 +580,7 @@ function handleMessage(msg) {
         );
         turnInfo.textContent = "Opponent is recording a melody...";
         hideAllControls();
+        showHands();
         renderStaff([]); // Clear staff while waiting
       }
       break;
