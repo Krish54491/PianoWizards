@@ -7,17 +7,38 @@
     <link rel="stylesheet" href="/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/webmidi@latest/dist/iife/webmidi.iife.js"></script>
   </head>
-  <body>
+  <body
+    class="bg-[#536bc8] !bg-[url('/src/peggle.png')] !bg-cover !bg-no-repeat !bg-center overflow-hidden;!image-rendering: pixelated;"
+  >
     <div id="app">
-      <h1>Piano MAGIC Duel</h1>
-
-      <div id="lobby">
-        <button id="create-btn">Create Game</button>
-        <div id="share-link" style="display: none">
+      <div
+        id="lobby"
+        class="flex flex-col gap-2 justify-center items-center h-screen"
+      >
+        <div>LOGO IMAGE</div>
+        <button
+          id="create-btn"
+          class="p-8 text-white !from-[#ac3232] !to-[#78371c] border-b-[#78371c]! border-[#ac3232]! border-2! bg-linear-0 rounded-md font-[LilitaOne] hover:brightness-75 hover:duration-0 duration-500"
+        >
+          CREATE LOBBY
+        </button>
+        <div
+          id="share-link"
+          class="bg-white/50 rounded-md overflow-hidden"
+          style="height: 0px"
+        >
           <p>Share this link with your friend:</p>
           <input type="text" id="room-link" readonly />
-          <p>Waiting for opponent...</p>
         </div>
+        <button
+          class="p-8 text-white from-[#ac3232] to-[#78371c] border-b-[#78371c]! border-[#ac3232]! border-2! bg-linear-0 rounded-md font-[LilitaOne] hover:brightness-75 hover:duration-0 duration-500"
+        >
+          JOIN LOBBY
+        </button>
+        <p class="text-[#342b1f]! bg-white/50 p-4 rounded-sm text-center">
+          NAME is an online tool to play HORSE against fellow pianists!<br />Written
+          by wizards for wizards.
+        </p>
       </div>
 
       <div
