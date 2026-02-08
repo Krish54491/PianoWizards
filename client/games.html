@@ -6,45 +6,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="!bg-[#536bc8] !bg-[url('/src/peggle.png')] !bg-cover !bg-no-repeat !bg-center overflow-hidden" style="image-rendering: pixelated;">
+    <button class="bg-[url('/src/forfeit.png')] absolute top-5 left-5 w-[338px] h-[83px] hover:brightness-75 cursor-pointer"></button>
+    <div class="flex flex-col items-center justify-center absolute bottom-5 left-5 gap-1">
+        <div class="bg-[url('/src/menu/you.png')] bg-cover bg-center bg-no-repeat w-[140px] h-[95px]"></div>
+        <div class="flex items-center justify-center gap-1 drop-shadow-lg drop-shadow-black">
+            <div class="bg-[url('/src/menu/m.png')] bg-cover bg-center bg-no-repeat w-[72px] h-[62px]"></div>
+            <div class="bg-[url('/src/menu/a.png')] bg-cover bg-center bg-no-repeat w-[49px] h-[61px]"></div>
+            <div class="bg-[url('/src/menu/g.png')] bg-cover bg-center bg-no-repeat w-[49px] h-[64px]"></div>
+            <div class="bg-[url('/src/menu/i.png')] bg-cover bg-center bg-no-repeat w-[23px] h-[65px]"></div>
+            <div class="bg-[url('/src/menu/c.png')] bg-cover bg-center bg-no-repeat w-[52px] h-[68px]"></div>
+        </div>
+    </div>
+    <div class="flex flex-col items-center justify-center absolute bottom-5 right-5 gap-1">
+        <div class="bg-[url('/src/menu/opp.png')] bg-cover bg-center bg-no-repeat w-[160px] h-[105px]"></div>
+        <div class="flex items-center justify-center gap-1 drop-shadow-lg drop-shadow-black">
+            <div class="bg-[url('/src/menu/m_blank.png')] bg-cover bg-center bg-no-repeat w-[72px] h-[62px]"></div>
+            <div class="bg-[url('/src/menu/a_blank.png')] bg-cover bg-center bg-no-repeat w-[49px] h-[61px]"></div>
+            <div class="bg-[url('/src/menu/g_blank.png')] bg-cover bg-center bg-no-repeat w-[49px] h-[64px]"></div>
+            <div class="bg-[url('/src/menu/i_blank.png')] bg-cover bg-center bg-no-repeat w-[23px] h-[65px]"></div>
+            <div class="bg-[url('/src/menu/c_blank.png')] bg-cover bg-center bg-no-repeat w-[52px] h-[68px]"></div>
+        </div>
+    </div>
     <div id="wizard-sprites" class="flex flex-col items-center max-h-[80%] scale-80">
         <div class="bg-[url('/src/wizard.png')] bg-cover bg-center bg-no-repeat w-[397px] h-[607px] z-10"></div>
         <div class="bg-[url('/src/keyboard.png')] -translate-y-32 bg-cover bg-center bg-no-repeat w-[942px] h-[529px] z-20"></div>
         <div style="animation-duration: 0.5s;" class="duration-500 hand-bounce bg-[url('/src/hand.png')] absolute translate-y-80 -translate-x-64  bg-cover bg-center bg-no-repeat w-[116px] h-[166px] z-30"></div>
         <div style="animation-duration: 1s;" class="duration-500 hand-bounce bg-[url('/src/hand.png')] -scale-x-[1] absolute translate-y-80 translate-x-64  bg-cover bg-center bg-no-repeat w-[116px] h-[166px] z-30"></div>
-    </div>
-    <div id="piano" class="!bottom-0 !absolute">
-        <div id="black-keys">
-            <button data-note="C#3" data-key="W">W</button>
-            <button data-note="D#3" data-key="E">E</button>
-            <span class="spacer"></span>
-            <button data-note="F#3" data-key="T">T</button>
-            <button data-note="G#3" data-key="Y">Y</button>
-            <button data-note="A#3" data-key="U">U</button>
-            <span class="spacer"></span>
-            <button data-note="C#4" data-key="O">O</button>
-            <button data-note="D#4" data-key="P">P</button>
-            <span class="spacer"></span>
-            <button data-note="F#4" data-key="[">[</button>
-            <button data-note="G#4" data-key="]">]</button>
-            <button data-note="A#4" data-key="C">C</button>
-        </div>
-        <div id="white-keys">
-            <button data-note="C3" data-key="A">A</button>
-            <button data-note="D3" data-key="S">S</button>
-            <button data-note="E3" data-key="D">D</button>
-            <button data-note="F3" data-key="F">F</button>
-            <button data-note="G3" data-key="G">G</button>
-            <button data-note="A3" data-key="H">H</button>
-            <button data-note="B3" data-key="J">J</button>
-            <button data-note="C4" data-key="K">K</button>
-            <button data-note="D4" data-key="L">L</button>
-            <button data-note="E4" data-key=";">;</button>
-            <button data-note="F4" data-key="'">'</button>
-            <button data-note="G4" data-key="Z">Z</button>
-            <button data-note="A4" data-key="X">X</button>
-            <button data-note="B4" data-key="V">V</button>
-            <button data-note="C5" data-key="B">B</button>
-        </div>
     </div>
 </body>
 </html>
