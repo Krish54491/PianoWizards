@@ -453,7 +453,7 @@ function handleMessage(msg) {
       roomId = msg.roomId;
       playerIndex = msg.playerIndex;
       roomLinkInput.value = `${location.origin}/${roomId}`;
-      shareLink.style.height = '64px';
+      shareLink.style.height = '96px';
       shareLink.style.padding = '4px';
       break;
 
