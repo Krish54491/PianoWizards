@@ -135,6 +135,7 @@ const lobby = document.getElementById("lobby");
 const createBtn = document.getElementById("create-btn");
 const shareLink = document.getElementById("share-link");
 const roomLinkInput = document.getElementById("room-link");
+const copyBtn = document.getElementById("copy-btn");
 
 const gameContainer = document.getElementById("game-container");
 const game = document.getElementById("game");
@@ -1065,3 +1066,9 @@ if (window.WebMidi) {
     .then(setupMidi)
     .catch((err) => console.log("MIDI not available:", err.message));
 }
+
+copyBtn.addEventListener("click", () => {
+  // Use the Clipboard API to write the text to the clipboard
+  navigator.clipboard.writeText(roomLinkInput.value);
+
+});
