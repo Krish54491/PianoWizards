@@ -1070,5 +1070,6 @@ if (window.WebMidi) {
 copyBtn.addEventListener("click", () => {
   // Use the Clipboard API to write the text to the clipboard
   navigator.clipboard.writeText(roomLinkInput.value);
+  copyBtn.style.background = "rgba(182, 255, 248, 0.8)";
 
 });
