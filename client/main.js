@@ -493,8 +493,8 @@ function stopTimer() {
 
 function connectWebSocket() {
   const protocol = location.protocol === "https:" ? "wss:" : "ws:";
-  const wsUrl = `${protocol}//localhost:3001`; // Local testing
-  //const wsUrl = `${protocol}//api.pianowizards.andrewklundt.com`;
+  //const testUrl = `${protocol}//localhost:3001`; // Local testing
+  const wsUrl = `${protocol}//api.pianowizards.andrewklundt.com`;
   ws = new WebSocket(wsUrl);
 
   ws.onopen = () => {
