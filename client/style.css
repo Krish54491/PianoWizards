@@ -107,7 +107,15 @@ button {
 }
 
 #white-keys button.active {
-  background: #f9ca24;
+  background: linear-gradient(
+    90deg,
+    #ffb3ba,
+    #ffdfba,
+    #ffffba,
+    #baffc9,
+    #bae1ff,
+    #d7baff
+  );
 }
 
 #black-keys {
@@ -134,7 +142,7 @@ button {
 }
 
 #black-keys button.active {
-  background: #f39c12;
+  background: linear-gradient(180deg, #0a0a0a, #393939, #4d4d4d);
 }
 
 #black-keys .spacer {
