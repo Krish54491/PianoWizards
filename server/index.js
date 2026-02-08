@@ -12,6 +12,15 @@ function generateRoomId() {
   return randomBytes(4).toString('hex');
 }
 
+// Duration quantization (matches client)
+function quantizeDuration(ms) {
+  if (ms <= 187) return 0; // sixteenth
+  if (ms <= 375) return 1; // eighth
+  if (ms <= 750) return 2; // quarter
+  if (ms <= 1500) return 3; // half
+  return 4; // whole
+}
+
 function broadcast(room, message, excludeWs = null) {
   const data = JSON.stringify(message);
   room.players.forEach((player) => {
@@ -28,40 +37,79 @@ function sendTo(ws, message) {
 }
 
 function compareNotes(original, attempt) {
-  // Generous comparison: allow ~300ms timing variance, ±1 extra/missing notes
-  if (Math.abs(original.length - attempt.length) > 1) {
+  // Safety check - if either is null/undefined, return false
+  if (!original || !attempt) {
     return false;
   }
 
-  const minLen = Math.min(original.length, attempt.length);
+  // Filter to get only chord/note events (exclude rests for length comparison)
+  const origChords = original.filter(e => e.type === 'chord' || e.notes || e.note);
+  const attemptChords = attempt.filter(e => e.type === 'chord' || e.notes || e.note);
+
+  // Generous comparison: allow ±1 extra/missing chord events
+  if (Math.abs(origChords.length - attemptChords.length) > 1) {
+    return false;
+  }
+
+  const minLen = Math.min(origChords.length, attemptChords.length);
   let mismatches = 0;
 
   for (let i = 0; i < minLen; i++) {
-    const o = original[i];
-    const a = attempt[i];
+    const o = origChords[i];
+    const a = attemptChords[i];
 
-    // Check note match
-    if (o.note !== a.note) {
+    // Get notes array from each event (handle both old and new format)
+    const oNotes = (o.notes || [o.note]).sort();
+    const aNotes = (a.notes || [a.note]).sort();
+
+    // Check chord notes match (order-independent)
+    if (!arraysEqual(oNotes, aNotes)) {
       mismatches++;
       if (mismatches > 1) return false;
       continue;
     }
 
-    // Check timing (relative to first note)
-    const oTime = o.timestamp - original[0].timestamp;
-    const aTime = a.timestamp - attempt[0].timestamp;
+    // Check timing (relative to first event)
+    const oTime = o.timestamp - origChords[0].timestamp;
+    const aTime = a.timestamp - attemptChords[0].timestamp;
     if (Math.abs(oTime - aTime) > 300) {
+      mismatches++;
+      if (mismatches > 1) return false;
+    }
+
+    // Check duration (generous: same or adjacent category)
+    const oDur = quantizeDuration(o.duration || 300);
+    const aDur = quantizeDuration(a.duration || 300);
+    if (Math.abs(oDur - aDur) > 1) {
       mismatches++;
       if (mismatches > 1) return false;
     }
   }
 
+  // Also check rest patterns (lenient - just check if rests exist in similar positions)
+  const origRests = original.filter(e => e.type === 'rest');
+  const attemptRests = attempt.filter(e => e.type === 'rest');
+
+  // If original has rests, attempt should have at least some rests (within tolerance)
+  if (origRests.length > 0 && attemptRests.length === 0) {
+    mismatches++;
+  }
+
+  return mismatches <= 1;
+}
+
+// Helper to compare arrays (order-independent after sorting)
+function arraysEqual(a, b) {
+  if (a.length !== b.length) return false;
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) return false;
+  }
   return true;
 }
 
 function getNextLetter(currentLetters) {
-  const MAGE = 'MAGE';
-  return MAGE[currentLetters.length] || '';
+  const MAGIC = 'MAGIC';
+  return MAGIC[currentLetters.length] || '';
 }
 
 wss.on('connection', (ws) => {
@@ -157,7 +205,7 @@ wss.on('connection', (ws) => {
         }
 
         // Check for game over
-        if (room.letters[playerIndex].length >= 4) {
+        if (room.letters[playerIndex].length >= 5) {
           broadcast(room, {
             type: 'game-over',
             loser: playerIndex,
@@ -195,6 +243,20 @@ wss.on('connection', (ws) => {
           currentTurn: 0,
           letters: room.letters
         });
+        break;
+      }
+
+      case 'forfeit': {
+        const room = rooms.get(playerRoomId);
+        if (!room) return;
+
+        // Player who forfeits loses
+        broadcast(room, {
+          type: 'game-over',
+          loser: playerIndex,
+          letters: room.letters
+        });
+        room.phase = 'ended';
         break;
       }
     }

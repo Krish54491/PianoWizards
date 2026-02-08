@@ -8,19 +8,23 @@ body {
   font-family: sans-serif;
   background: #1a1a2e;
   color: #eee;
-  display: flex;
-  justify-content: center;
-  padding: 40px 20px;
   margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 #app {
   text-align: center;
-  max-width: 800px;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {
-  margin-bottom: 30px;
+  margin: 20px 0;
 }
 
 button {
@@ -31,17 +35,13 @@ button {
   border-radius: 4px;
 }
 
-#lobby button,
-#controls button,
-#game-over button {
+#lobby button, #controls button, #game-over button {
   background: #4a69bd;
   color: white;
   margin: 5px;
 }
 
-#lobby button:hover,
-#controls button:hover,
-#game-over button:hover {
+#lobby button:hover, #controls button:hover, #game-over button:hover {
   background: #6a89cc;
 }
 
@@ -53,21 +53,78 @@ button {
   margin: 10px 0;
 }
 
-#status {
-  margin-bottom: 20px;
+/* Game container - full screen layout */
+#game-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-#letters {
+/* Staff wrapper - independent positioning (can be removed without affecting other elements) */
+#staff-wrapper {
+  pointer-events: auto;
+}
+
+/* Staff notation - chalkboard background */
+#staff-container {
+  background: url('/media/chalkboard.png') center/cover;
+  border-radius: 8px;
+  padding: 15px;
+  min-width: 500px;
+  max-width: 600px;
+}
+
+#staff-container h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  color: #f5f5dc;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+#staff {
+  background: #4b692f;
+  border-radius: 4px;
+  min-height: 180px;
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 40px;
-  font-size: 20px;
-  font-family: monospace;
+  overflow-x: auto;
+}
+
+#staff svg {
+  display: block;
+}
+
+/* Style VexFlow elements to off-white for chalkboard look */
+#staff svg path,
+#staff svg line,
+#staff svg rect {
+  stroke: #f5f5dc !important;
+  fill: #f5f5dc !important;
+}
+
+#staff svg text {
+  fill: #f5f5dc !important;
+}
+
+/* Game area - controls and status */
+#game {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  padding: 15px;
+  max-width: 300px;
+}
+
+#status {
   margin-bottom: 10px;
 }
 
 #turn-info {
-  font-size: 18px;
+  font-size: 16px;
   color: #f9ca24;
 }
 
@@ -77,10 +134,17 @@ button {
   margin-top: 10px;
 }
 
+/* Piano - PianoWizards style, fixed at bottom */
 #piano {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   display: inline-block;
-  position: relative;
-  margin: 20px 0;
+  background: linear-gradient(to bottom, #1a1a2e, #0d0d1a);
+  padding: 20px 20px 10px 20px;
+  border-top: 2px solid #333;
+  z-index: 100;
 }
 
 #white-keys {
@@ -121,8 +185,8 @@ button {
 #black-keys {
   display: flex;
   position: absolute;
-  top: 0;
-  left: 25px;
+  top: 20px;
+  left: 45px;
   z-index: 1;
 }
 
@@ -167,21 +231,48 @@ button {
   font-size: 28px;
 }
 
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  #staff-container {
+    min-width: 280px;
+    max-width: 95vw;
+  }
+}
+
+/* Hand bounce animation for wizard hands */
 @keyframes hand {
   0% {
-    transform: translateY(80px) translateX(25px);
+    transform: translateY(320px) translateX(-256px);
   }
   25% {
-    transform: translateY(0px) translateX(0px);
+    transform: translateY(240px) translateX(-281px);
   }
   50% {
-    transform: translateY(80px) translateX(-25px);
+    transform: translateY(320px) translateX(-306px);
   }
   75% {
-    transform: translateY(0px) translateX(0px);
+    transform: translateY(240px) translateX(-281px);
   }
   100% {
-    transform: translateY(80px) translateX(25px);
+    transform: translateY(320px) translateX(-256px);
+  }
+}
+
+@keyframes hand-right {
+  0% {
+    transform: translateY(320px) translateX(256px) scaleX(-1);
+  }
+  25% {
+    transform: translateY(240px) translateX(281px) scaleX(-1);
+  }
+  50% {
+    transform: translateY(320px) translateX(306px) scaleX(-1);
+  }
+  75% {
+    transform: translateY(240px) translateX(281px) scaleX(-1);
+  }
+  100% {
+    transform: translateY(320px) translateX(256px) scaleX(-1);
   }
 }
 
@@ -190,3 +281,8 @@ button {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
+
+.hand-bounce.-scale-x-\[1\] {
+  animation-name: hand-right;
+}
+

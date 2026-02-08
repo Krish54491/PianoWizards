@@ -1,105 +1,129 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Piano MAGE Duel</title>
-    <link rel="stylesheet" href="/style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/webmidi@latest/dist/iife/webmidi.iife.js"></script>
-    <script type="module">
-      // Enable WEBMIDI.js and trigger the onEnabled() function when ready
-      WebMidi.enable()
-        .then(onEnabled)
-        .catch((err) => alert(err));
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Piano MAGIC Duel</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/webmidi@latest/dist/iife/webmidi.iife.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>Piano MAGIC Duel</h1>
 
-      // Function triggered when WEBMIDI.js is ready
-      function onEnabled() {
-        // Display available MIDI input devices
+    <div id="lobby">
+      <button id="create-btn">Create Game</button>
+      <div id="share-link" style="display:none;">
+        <p>Share this link with your friend:</p>
+        <input type="text" id="room-link" readonly>
+        <p>Waiting for opponent...</p>
+      </div>
+    </div>
 
-        if (WebMidi.inputs.length < 1) {
-          alert("No device detected.");
-        }
-      }
-    </script>
-  </head>
-  <body>
-    <div id="app">
-      <h1>Piano MAGE Duel</h1>
+    <div id="game-container" class="bg-[#536bc8] bg-[url('/src/peggle.png')] bg-cover bg-no-repeat bg-center overflow-hidden" style="display:none; image-rendering: pixelated;">
+      <!-- Forfeit Button - Top Left -->
+      <button id="forfeit-btn" class="bg-[url('/src/forfeit.png')] absolute top-5 left-5 w-[270px] h-[66px] hover:brightness-75 cursor-pointer bg-cover bg-center bg-no-repeat border-none"></button>
 
-      <div id="lobby">
-        <button id="create-btn">Create Game</button>
-        <div id="share-link" style="display: none">
-          <p>Share this link with your friend:</p>
-          <input type="text" id="room-link" readonly />
-          <p>Waiting for opponent...</p>
+      <!-- Staff Container - Top Right, independent positioning (removeable) -->
+      <div id="staff-wrapper" class="bg-cover! bg-no-repeat! bg-center! absolute top-5 right-5 z-50 bg-[url('../media/chalkboard.png')]">
+        <div id="staff-container">
+          <h3>Staff Notation</h3>
+          <div id="staff"></div>
         </div>
       </div>
 
-      <div id="game" style="display: none">
+      <!-- Game Status & Controls - Top Left (below forfeit) -->
+      <div id="game" class="absolute top-24 left-5 z-40">
         <div id="status">
-          <div id="letters">
-            <span>You: <span id="my-letters">____</span></span>
-            <span>Opponent: <span id="opp-letters">____</span></span>
-          </div>
           <div id="turn-info"></div>
-          <div id="timer" style="display: none">
-            Time: <span id="time-left">50</span>s
-          </div>
-        </div>
-
-        <div id="piano">
-          <div id="black-keys">
-            <button data-note="C#3" data-key="W">W</button>
-            <button data-note="D#3" data-key="E">E</button>
-            <span class="spacer"></span>
-            <button data-note="F#3" data-key="T">T</button>
-            <button data-note="G#3" data-key="Y">Y</button>
-            <button data-note="A#3" data-key="U">U</button>
-            <span class="spacer"></span>
-            <button data-note="C#4" data-key="O">O</button>
-            <button data-note="D#4" data-key="P">P</button>
-            <span class="spacer"></span>
-            <button data-note="F#4" data-key="[">[</button>
-            <button data-note="G#4" data-key="]">]</button>
-            <button data-note="A#4" data-key="C">C</button>
-          </div>
-          <div id="white-keys">
-            <button data-note="C3" data-key="A">A</button>
-            <button data-note="D3" data-key="S">S</button>
-            <button data-note="E3" data-key="D">D</button>
-            <button data-note="F3" data-key="F">F</button>
-            <button data-note="G3" data-key="G">G</button>
-            <button data-note="A3" data-key="H">H</button>
-            <button data-note="B3" data-key="J">J</button>
-            <button data-note="C4" data-key="K">K</button>
-            <button data-note="D4" data-key="L">L</button>
-            <button data-note="E4" data-key=";">;</button>
-            <button data-note="F4" data-key="'">'</button>
-            <button data-note="G4" data-key="Z">Z</button>
-            <button data-note="A4" data-key="X">X</button>
-            <button data-note="B4" data-key="V">V</button>
-            <button data-note="C5" data-key="B">B</button>
-          </div>
+          <div id="timer" style="display:none;">Time: <span id="time-left">50</span>s</div>
         </div>
 
         <div id="controls">
-          <button id="record-btn" style="display: none">Start Recording</button>
-          <button id="done-btn" style="display: none">Done</button>
-          <button id="listen-btn" style="display: none">
-            Listen to Melody
-          </button>
-          <button id="submit-btn" style="display: none">Submit Attempt</button>
+          <button id="done-btn" style="display:none;">Done</button>
+          <button id="listen-btn" style="display:none;">Listen to Melody</button>
+          <button id="submit-btn" style="display:none;">Submit Attempt</button>
         </div>
 
         <div id="message"></div>
       </div>
 
-      <div id="game-over" style="display: none">
-        <h2 id="result-text"></h2>
-        <button id="new-game-btn">New Game</button>
+      <!-- Wizard Sprites - Center, slightly shrunk and higher up -->
+      <div id="wizard-sprites" class="flex flex-col items-center justify-center absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/3 scale-65">
+        <div class="bg-[url('/src/wizard.png')] bg-cover bg-center bg-no-repeat w-[397px] h-[607px] z-10"></div>
+        <div class="bg-[url('/src/keyboard.png')] -translate-y-32 bg-cover bg-center bg-no-repeat w-[942px] h-[529px] z-20"></div>
+        <div id="hand-left" style="animation-duration: 0.5s; opacity: 0;" class="hand-bounce bg-[url('/src/hand.png')] absolute -translate-y-100 -translate-x-0 bg-cover bg-center bg-no-repeat w-[116px] h-[166px] z-30 transition-opacity duration-300"></div>
+        <div id="hand-right" style="animation-duration: 1s; opacity: 0;" class="hand-bounce bg-[url('/src/hand.png')] scale-x-[-1]! absolute -translate-y-100 translate-x-0 bg-cover bg-center bg-no-repeat w-[116px] h-[166px] z-30 transition-opacity duration-300"></div>
+      </div>
+
+      <!-- You (Player) Letters - Bottom Left -->
+      <div class="bg-white/50 p-4 rounded-md flex flex-col items-center justify-center absolute bottom-32 left-10 gap-1 z-50 !scale-x-75 !scale-y-75 origin-bottom-left!">
+        <div class="bg-[url('/src/menu/you.png')] bg-cover bg-center bg-no-repeat w-[210px] h-[142px]"></div>
+        <div id="my-letters-container" class="flex items-center justify-center gap-1 drop-shadow-lg drop-shadow-black">
+          <div data-letter="m" class="bg-[url('/src/menu/m_blank.png')] bg-cover bg-center bg-no-repeat w-[108px] h-[93px]"></div>
+          <div data-letter="a" class="bg-[url('/src/menu/a_blank.png')] bg-cover bg-center bg-no-repeat w-[74px] h-[92px]"></div>
+          <div data-letter="g" class="bg-[url('/src/menu/g_blank.png')] bg-cover bg-center bg-no-repeat w-[74px] h-[96px]"></div>
+          <div data-letter="i" class="bg-[url('/src/menu/i_blank.png')] bg-cover bg-center bg-no-repeat w-[35px] h-[98px]"></div>
+          <div data-letter="c" class="bg-[url('/src/menu/c_blank.png')] bg-cover bg-center bg-no-repeat w-[78px] h-[102px]"></div>
+        </div>
+      </div>
+
+      <!-- Opponent Letters - Bottom Right -->
+      <div class="bg-white/50 p-4 rounded-md flex flex-col items-center justify-center absolute bottom-32 right-10 gap-1 z-50 !scale-x-75 !scale-y-75 origin-bottom-right!">
+        <div class="bg-[url('/src/menu/opp.png')] bg-cover bg-center bg-no-repeat w-[240px] h-[158px]"></div>
+        <div id="opp-letters-container" class="flex items-center justify-center gap-1 drop-shadow-lg drop-shadow-black">
+          <div data-letter="m" class="bg-[url('/src/menu/m_blank.png')] bg-cover bg-center bg-no-repeat w-[108px] h-[93px]"></div>
+          <div data-letter="a" class="bg-[url('/src/menu/a_blank.png')] bg-cover bg-center bg-no-repeat w-[74px] h-[92px]"></div>
+          <div data-letter="g" class="bg-[url('/src/menu/g_blank.png')] bg-cover bg-center bg-no-repeat w-[74px] h-[96px]"></div>
+          <div data-letter="i" class="bg-[url('/src/menu/i_blank.png')] bg-cover bg-center bg-no-repeat w-[35px] h-[98px]"></div>
+          <div data-letter="c" class="bg-[url('/src/menu/c_blank.png')] bg-cover bg-center bg-no-repeat w-[78px] h-[102px]"></div>
+        </div>
+      </div>
+
+      <!-- Piano - Fixed at Bottom (PianoWizards layout C3-C5) -->
+      <div id="piano">
+        <div id="black-keys">
+          <button data-note="C#3"></button>
+          <button data-note="D#3"></button>
+          <span class="spacer"></span>
+          <button data-note="F#3"></button>
+          <button data-note="G#3"></button>
+          <button data-note="A#3"></button>
+          <span class="spacer"></span>
+          <button data-note="C#4"></button>
+          <button data-note="D#4"></button>
+          <span class="spacer"></span>
+          <button data-note="F#4"></button>
+          <button data-note="G#4"></button>
+          <button data-note="A#4"></button>
+        </div>
+        <div id="white-keys">
+          <button data-note="C3"></button>
+          <button data-note="D3"></button>
+          <button data-note="E3"></button>
+          <button data-note="F3"></button>
+          <button data-note="G3"></button>
+          <button data-note="A3"></button>
+          <button data-note="B3"></button>
+          <button data-note="C4"></button>
+          <button data-note="D4"></button>
+          <button data-note="E4"></button>
+          <button data-note="F4"></button>
+          <button data-note="G4"></button>
+          <button data-note="A4"></button>
+          <button data-note="B4"></button>
+          <button data-note="C5"></button>
+        </div>
       </div>
     </div>
 
-    <script type="module" src="/main.js"></script>
-  </body>
+    <div id="game-over" style="display:none;">
+      <h2 id="result-text"></h2>
+      <button id="new-game-btn">New Game</button>
+    </div>
+  </div>
+
+  <script type="module" src="/main.js"></script>
+</body>
 </html>
+

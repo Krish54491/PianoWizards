@@ -3,19 +3,17 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "react-scripts start",
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "predeploy": "npm run build"
-  },
-  "devDependencies": {
-    "vite": "^5.4.21"
+    "preview": "vite preview"
   },
   "dependencies": {
+    "vexflow": "^5.0.0",
     "@tailwindcss/vite": "^4.1.18",
-    "@vitejs/plugin-react": "^4.7.0",
     "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
   }
 }
+
