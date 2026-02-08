@@ -133,9 +133,16 @@ let lastNoteEndTime = null; // For rest detection
 // DOM elements
 const lobby = document.getElementById("lobby");
 const createBtn = document.getElementById("create-btn");
+const joinBtn = document.getElementById("join-btn");
 const shareLink = document.getElementById("share-link");
 const roomLinkInput = document.getElementById("room-link");
 const copyBtn = document.getElementById("copy-btn");
+
+// Join modal elements
+const joinModal = document.getElementById("join-modal");
+const joinCodeInput = document.getElementById("join-code-input");
+const joinConfirmBtn = document.getElementById("join-confirm-btn");
+const joinCancelBtn = document.getElementById("join-cancel-btn");
 
 const gameContainer = document.getElementById("game-container");
 const game = document.getElementById("game");
@@ -486,8 +493,8 @@ function stopTimer() {
 
 function connectWebSocket() {
   const protocol = location.protocol === "https:" ? "wss:" : "ws:";
-  const testUrl = `${protocol}//localhost:3001`; // Local testing
-  const wsUrl = `${protocol}//api.pianowizards.andrewklundt.com`;
+  const wsUrl = `${protocol}//localhost:3001`; // Local testing
+  //const wsUrl = `${protocol}//api.pianowizards.andrewklundt.com`;
   ws = new WebSocket(wsUrl);
 
   ws.onopen = () => {
@@ -1075,4 +1082,46 @@ copyBtn.addEventListener("click", () => {
   navigator.clipboard.writeText(roomLinkInput.value);
   copyBtn.style.background = "rgba(182, 255, 248, 0.8)";
 
+});
+
+// ==================== Join Modal ====================
+
+joinBtn.addEventListener("click", () => {
+  joinModal.style.display = "flex";
+  joinCodeInput.value = "";
+  joinCodeInput.focus();
+});
+
+joinCancelBtn.addEventListener("click", () => {
+  joinModal.style.display = "none";
+});
+
+joinConfirmBtn.addEventListener("click", () => {
+  const code = joinCodeInput.value.trim();
+  if (code.length === 8) {
+    joinModal.style.display = "none";
+    window.location.href = `/${code}`;
+  } else {
+    alert("Please enter an 8-digit code");
+  }
+});
+
+// Allow Enter key to confirm
+joinCodeInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    const code = joinCodeInput.value.trim();
+    if (code.length === 8) {
+      joinModal.style.display = "none";
+      window.location.href = `/${code}`;
+    } else {
+      alert("Please enter an 8-digit code");
+    }
+  }
+});
+
+// Close modal when clicking outside
+joinModal.addEventListener("click", (e) => {
+  if (e.target === joinModal) {
+    joinModal.style.display = "none";
+  }
 });
