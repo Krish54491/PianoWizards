@@ -1,12 +1,27 @@
+import express from "express";
 import { WebSocketServer } from "ws";
 import { createServer } from "http";
 import { randomBytes } from "crypto";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const PORT = process.env.PORT || 3001;
-const rooms = new Map();
 
-const server = createServer();
+const app = express();
+const server = createServer(app);
 const wss = new WebSocketServer({ server });
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve frontend
+app.use(express.static(path.join(__dirname, "../client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+});
+
+const rooms = new Map();
 
 function generateRoomId() {
   return randomBytes(4).toString("hex");
