@@ -1,6 +1,6 @@
 # Piano MAGE Duel
 
-A simple real-time multiplayer piano game. Take turns playing melodies - one player records, the other tries to replay it. Fail and you get a letter (M-A-G-E). First to spell MAGE loses!
+A simple real-time multiplayer piano game. Take turns playing melodies - one player records, the other tries to replay it. Fail and you get a letter (M-A-G-I-C). First to spell MAGE loses!
 
 ## Setup
 
@@ -30,9 +30,9 @@ cd client && npm run dev
 2. Click "Create Game" and share the link with a friend
 3. Player 1 records a melody using keyboard keys, then clicks "Done"
 4. Player 2 listens to the melody, then tries to replay it within 50 seconds
-5. If they fail, they get a letter toward MAGE
+5. If they fail, they get a letter toward MAGIC
 6. Roles switch - now Player 2 records and Player 1 replays
-7. First to spell MAGE loses!
+7. First to spell MAGIC loses!
 
 ## Controls
 
