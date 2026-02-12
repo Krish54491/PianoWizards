@@ -1,6 +1,6 @@
 # Piano MAGE Duel
 
-A simple real-time multiplayer piano game. Take turns playing melodies - one player records, the other tries to replay it. Fail and you get a letter (M-A-G-I-C). First to spell MAGE loses!
+A simple real-time multiplayer piano game. Take turns playing melodies - one player records, the other tries to replay it. Fail and you get a letter (M-A-G-I-C). First to spell MAGIC loses!
 
 ## Setup
 
