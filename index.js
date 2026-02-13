@@ -4,6 +4,7 @@ import { randomBytes } from "crypto";
 import express from "express";
 import path from "path";
 import fs from "fs";
+
 process.on("uncaughtException", (err) => {
   console.error("UNCAUGHT:", err);
 });
@@ -22,10 +23,9 @@ app.use(express.static(path.join(__dirname, "./client/dist")));
 console.log("Serving from:", path.join(__dirname, "client", "dist"));
 
 // Catch-all fallback for SPA
-app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, "./client/dist/index.html"));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/dist/index.html"));
 });
-
 const PORT = process.env.PORT || 3000;
 const rooms = new Map();
 
