@@ -495,7 +495,7 @@ function connectWebSocket() {
   const port = 3001;
   const protocol = location.protocol === "https:" ? "wss:" : "ws:";
   const testUrl = `${protocol}//localhost:${port}`; // Local testing
-  const wsUrl = `${protocol}//pianowizards-production-8b31.up.railway.app`; // production URL
+  const wsUrl = `${protocol}//${location.host}`; // production URL
   ws = new WebSocket(wsUrl);
 
   ws.onopen = () => {
