@@ -5,10 +5,10 @@ import express from "express";
 import path from "path";
 import fs from "fs";
 
-console.log("Dist exists:", fs.existsSync("/app/client/dist"));
+console.log("Dist exists:", fs.existsSync("./client/dist"));
 console.log(
   "Dist contents:",
-  fs.readdirSync("/app/client/dist", { withFileTypes: false }),
+  fs.readdirSync("./client/dist", { withFileTypes: false }),
 );
 
 const app = express();
@@ -23,15 +23,15 @@ app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "client/dist/index.html"));
 });
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 3000;
 const rooms = new Map();
 
 const server = createServer(app);
 const wss = new WebSocketServer({ server });
 
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 function generateRoomId() {
   return randomBytes(4).toString("hex");
 }
