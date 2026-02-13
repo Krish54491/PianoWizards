@@ -7,21 +7,11 @@ A simple real-time multiplayer piano game. Take turns playing melodies - one pla
 ```bash
 # Install dependencies
 npm install
-cd client && npm install
-cd ../server && npm install
-cd ..
-
-# Run both server and client
+cd client
+npm install
 npm run dev
-```
-
-Or run separately:
-```bash
-# Terminal 1 - Server
-cd server && node index.js
-
-# Terminal 2 - Client
-cd client && npm run dev
+cd..
+node index.js
 ```
 
 ## How to Play
@@ -45,4 +35,3 @@ cd client && npm run dev
 - Frontend: Vite + Vanilla JS + Web Audio API
 - Backend: Node.js + WebSocket (ws library)
 - No database - rooms stored in memory
-
