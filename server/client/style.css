@@ -35,13 +35,15 @@ button {
   border-radius: 4px;
 }
 
-#controls button, #game-over button {
+#controls button,
+#game-over button {
   background: #4a69bd;
   color: white;
   margin: 5px;
 }
 
-#controls button:hover, #game-over button:hover {
+#controls button:hover,
+#game-over button:hover {
   background: #6a89cc;
 }
 
@@ -70,7 +72,7 @@ button {
 
 /* Staff notation - chalkboard background */
 #staff-container {
-  background: url('/media/chalkboard.png') center/cover;
+  background: url("/media/chalkboard.png") center/cover;
   border-radius: 8px;
   padding: 15px;
   min-width: 500px;
@@ -81,7 +83,7 @@ button {
   margin: 0 0 10px 0;
   font-size: 16px;
   color: #f5f5dc;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 #staff {
@@ -286,6 +288,6 @@ button {
 }
 
 @font-face {
-    font-family: 'LilitaOne';
-    src: url('src/LilitaOne-Regular.ttf') format('truetype');
+  font-family: "LilitaOne";
+  src: url("/LilitaOne-Regular.ttf") format("truetype");
 }

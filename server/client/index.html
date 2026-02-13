@@ -3,20 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="src/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon.png" />
     <title>PianoWizard</title>
     <link rel="stylesheet" href="/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/webmidi@latest/dist/iife/webmidi.iife.js"></script>
   </head>
   <body
-    class="bg-[#536bc8] !bg-[url('/src/peggle.png')] !bg-cover !bg-no-repeat !bg-center overflow-hidden;!image-rendering: pixelated;"
+    class="bg-[#536bc8] !bg-[url('/peggle.png')] !bg-cover !bg-no-repeat !bg-center overflow-hidden;!image-rendering: pixelated;"
   >
     <div id="app">
       <div
         id="lobby"
         class="text-black! flex flex-col gap-2 justify-center items-center h-screen"
       >
-        <img src="src/logo.png" width="380px" class="drop-shadow-md" />
+        <img src="/logo.png" width="380px" class="drop-shadow-md" />
         <button
           id="create-btn"
           class="p-8 text-white! !from-[#ac3232] !to-[#78371c] border-b-[#78371c]! border-[#ac3232]! border-2! bg-linear-0 rounded-md font-[LilitaOne] hover:brightness-75 hover:duration-0 duration-500"
@@ -41,7 +41,7 @@
               class="p-0! flex justify-center items-center -translate-x-5 duration-500 hover:bg-white/80! rounded-md! border! border-gray-500! h-8! w-8!"
             >
               <object
-                data="src/iconmonstr-copy-clipboard-lined.svg"
+                data="/iconmonstr-copy-clipboard-lined.svg"
                 class="pointer-events-none"
                 width="15px"
                 height="15px"
@@ -96,19 +96,19 @@
 
       <div
         id="game-container"
-        class="bg-[#536bc8] bg-[url('/src/peggle.png')] bg-cover bg-no-repeat bg-center overflow-hidden"
+        class="bg-[#536bc8] bg-[url('/peggle.png')] bg-cover bg-no-repeat bg-center overflow-hidden"
         style="display: none; image-rendering: pixelated"
       >
         <!-- Forfeit Button - Top Left -->
         <button
           id="forfeit-btn"
-          class="bg-[url('/src/forfeit.png')] absolute top-5 left-5 w-[270px] h-[66px] hover:brightness-75 cursor-pointer bg-cover bg-center bg-no-repeat border-none"
+          class="bg-[url('/forfeit.png')] absolute top-5 left-5 w-[270px] h-[66px] hover:brightness-75 cursor-pointer bg-cover bg-center bg-no-repeat border-none"
         ></button>
 
         <!-- Staff Container - Top Right, independent positioning (removeable) -->
         <div
           id="staff-wrapper"
-          class="bg-cover! bg-no-repeat! bg-center! absolute top-5 right-5 z-50 bg-[url('../media/chalkboard.png')]"
+          class="bg-cover! bg-no-repeat! bg-center! absolute top-5 right-5 z-50 bg-[url('/media/chalkboard.png')]"
         >
           <div id="staff-container">
             <h3>Staff Notation</h3>
@@ -144,20 +144,20 @@
           class="flex flex-col items-center justify-center absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/3 scale-65"
         >
           <div
-            class="bg-[url('/src/wizard.png')] bg-cover bg-center bg-no-repeat w-[397px] h-[607px] z-10"
+            class="bg-[url('/wizard.png')] bg-cover bg-center bg-no-repeat w-[397px] h-[607px] z-10"
           ></div>
           <div
-            class="bg-[url('/src/keyboard.png')] -translate-y-32 bg-cover bg-center bg-no-repeat w-[942px] h-[529px] z-20"
+            class="bg-[url('/keyboard.png')] -translate-y-32 bg-cover bg-center bg-no-repeat w-[942px] h-[529px] z-20"
           ></div>
           <div
             id="hand-left"
             style="animation-duration: 0.5s; opacity: 0"
-            class="hand-bounce bg-[url('/src/hand.png')] absolute -translate-y-100 -translate-x-0 bg-cover bg-center bg-no-repeat w-[116px] h-[166px] z-30 transition-opacity duration-300"
+            class="hand-bounce bg-[url('/hand.png')] absolute -translate-y-100 -translate-x-0 bg-cover bg-center bg-no-repeat w-[116px] h-[166px] z-30 transition-opacity duration-300"
           ></div>
           <div
             id="hand-right"
             style="animation-duration: 1s; opacity: 0"
-            class="hand-bounce bg-[url('/src/hand.png')] scale-x-[-1]! absolute -translate-y-100 translate-x-0 bg-cover bg-center bg-no-repeat w-[116px] h-[166px] z-30 transition-opacity duration-300"
+            class="hand-bounce bg-[url('/hand.png')] scale-x-[-1]! absolute -translate-y-100 translate-x-0 bg-cover bg-center bg-no-repeat w-[116px] h-[166px] z-30 transition-opacity duration-300"
           ></div>
         </div>
 
@@ -166,7 +166,7 @@
           class="bg-white/50 p-4 rounded-md flex flex-col items-center justify-center absolute bottom-32 left-10 gap-1 z-50 !scale-x-75 !scale-y-75 origin-bottom-left!"
         >
           <div
-            class="bg-[url('/src/menu/you.png')] bg-cover bg-center bg-no-repeat w-[210px] h-[142px]"
+            class="bg-[url('/menu/you.png')] bg-cover bg-center bg-no-repeat w-[210px] h-[142px]"
           ></div>
           <div
             id="my-letters-container"
@@ -174,23 +174,23 @@
           >
             <div
               data-letter="m"
-              class="bg-[url('/src/menu/m_blank.png')] bg-cover bg-center bg-no-repeat w-[108px] h-[93px]"
+              class="bg-[url('/menu/m_blank.png')] bg-cover bg-center bg-no-repeat w-[108px] h-[93px]"
             ></div>
             <div
               data-letter="a"
-              class="bg-[url('/src/menu/a_blank.png')] bg-cover bg-center bg-no-repeat w-[74px] h-[92px]"
+              class="bg-[url('/menu/a_blank.png')] bg-cover bg-center bg-no-repeat w-[74px] h-[92px]"
             ></div>
             <div
               data-letter="g"
-              class="bg-[url('/src/menu/g_blank.png')] bg-cover bg-center bg-no-repeat w-[74px] h-[96px]"
+              class="bg-[url('/menu/g_blank.png')] bg-cover bg-center bg-no-repeat w-[74px] h-[96px]"
             ></div>
             <div
               data-letter="i"
-              class="bg-[url('/src/menu/i_blank.png')] bg-cover bg-center bg-no-repeat w-[35px] h-[98px]"
+              class="bg-[url('/menu/i_blank.png')] bg-cover bg-center bg-no-repeat w-[35px] h-[98px]"
             ></div>
             <div
               data-letter="c"
-              class="bg-[url('/src/menu/c_blank.png')] bg-cover bg-center bg-no-repeat w-[78px] h-[102px]"
+              class="bg-[url('/menu/c_blank.png')] bg-cover bg-center bg-no-repeat w-[78px] h-[102px]"
             ></div>
           </div>
         </div>
@@ -200,7 +200,7 @@
           class="bg-white/50 p-4 rounded-md flex flex-col items-center justify-center absolute bottom-32 right-10 gap-1 z-50 !scale-x-75 !scale-y-75 origin-bottom-right!"
         >
           <div
-            class="bg-[url('/src/menu/opp.png')] bg-cover bg-center bg-no-repeat w-[240px] h-[158px]"
+            class="bg-[url('/menu/opp.png')] bg-cover bg-center bg-no-repeat w-[240px] h-[158px]"
           ></div>
           <div
             id="opp-letters-container"
@@ -208,23 +208,23 @@
           >
             <div
               data-letter="m"
-              class="bg-[url('/src/menu/m_blank.png')] bg-cover bg-center bg-no-repeat w-[108px] h-[93px]"
+              class="bg-[url('/menu/m_blank.png')] bg-cover bg-center bg-no-repeat w-[108px] h-[93px]"
             ></div>
             <div
               data-letter="a"
-              class="bg-[url('/src/menu/a_blank.png')] bg-cover bg-center bg-no-repeat w-[74px] h-[92px]"
+              class="bg-[url('/menu/a_blank.png')] bg-cover bg-center bg-no-repeat w-[74px] h-[92px]"
             ></div>
             <div
               data-letter="g"
-              class="bg-[url('/src/menu/g_blank.png')] bg-cover bg-center bg-no-repeat w-[74px] h-[96px]"
+              class="bg-[url('/menu/g_blank.png')] bg-cover bg-center bg-no-repeat w-[74px] h-[96px]"
             ></div>
             <div
               data-letter="i"
-              class="bg-[url('/src/menu/i_blank.png')] bg-cover bg-center bg-no-repeat w-[35px] h-[98px]"
+              class="bg-[url('/menu/i_blank.png')] bg-cover bg-center bg-no-repeat w-[35px] h-[98px]"
             ></div>
             <div
               data-letter="c"
-              class="bg-[url('/src/menu/c_blank.png')] bg-cover bg-center bg-no-repeat w-[78px] h-[102px]"
+              class="bg-[url('/menu/c_blank.png')] bg-cover bg-center bg-no-repeat w-[78px] h-[102px]"
             ></div>
           </div>
         </div>

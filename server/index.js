@@ -1,11 +1,27 @@
 import { WebSocketServer } from "ws";
 import { createServer } from "http";
 import { randomBytes } from "crypto";
+import express from "express";
+import path from "path";
 
-const PORT = process.env.PORT || 3001;
+const app = express();
+const __dirname = path.resolve();
+
+// Serve static files first
+app.use(express.static(path.join(__dirname, "client/dist")));
+
+// Catch-all fallback for SPA
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, "client/dist/index.html"));
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 const rooms = new Map();
 
-const server = createServer();
+const server = createServer(app);
 const wss = new WebSocketServer({ server });
 
 function generateRoomId() {
@@ -275,7 +291,4 @@ wss.on("connection", (ws) => {
       }
     }
   });
-});
-server.listen(PORT, () => {
-  console.log(`WebSocket server running on ws://0.0.0.0:${PORT}`);
 });

@@ -416,10 +416,10 @@ function updateLetterImages(container, letterCount) {
     const letter = div.dataset.letter;
     if (index < letterCount) {
       // Show filled letter
-      div.style.backgroundImage = `url('/src/menu/${letter}.png')`;
+      div.style.backgroundImage = `url('/menu/${letter}.png')`;
     } else {
       // Show blank letter
-      div.style.backgroundImage = `url('/src/menu/${letter}_blank.png')`;
+      div.style.backgroundImage = `url('/menu/${letter}_blank.png')`;
     }
   });
 }

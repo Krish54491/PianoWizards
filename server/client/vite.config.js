@@ -16,5 +16,4 @@ export default defineConfig({
       allow: [".."],
     },
   },
-  publicDir: "../media", // Serve media folder as public assets
 });
