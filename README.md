@@ -6,12 +6,13 @@ A simple real-time multiplayer piano game. Take turns playing melodies - one pla
 
 ```bash
 # Install dependencies
-npm install
 cd client
 npm install
-npm run dev
+npm run build
 cd..
+npm install
 node index.js
+
 ```
 
 ## How to Play
